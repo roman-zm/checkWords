@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    connect(ui->lineEdit, SIGNAL(returnPressed()), ui->nextWordButton, SLOT(click()));
 }
 
 MainWindow::~MainWindow()
@@ -18,12 +19,11 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionOpen_triggered()
 {
+   // words.clear();
+    rightWords.clear();
+
     currentWordNumber = 1;
-//    path = QFileDialog::getOpenFileName(0, tr("Open file"), "", "*.txt");
-//    QFile opndFile(path);
-//    QTextStream in(&opndFile);
-//    wordStr = in.readAll();
-//    ui->textEdit->setText(wordStr);
+    resWidget.clearTable();
 
     QString fileName = QFileDialog::getOpenFileName(0, tr("Open file"), "", "*.txt");
     if(fileName != ""){
@@ -31,14 +31,11 @@ void MainWindow::on_actionOpen_triggered()
         if(!inputFile.open(QIODevice::ReadOnly)){
             QMessageBox::critical(this,tr("Error"),"",tr("Can notopen file"));
         } else {
-           // QString buffer;
             QTextStream in(&inputFile);
             wordStr = in.readAll();
             inputFile.close();
-           // ui->textEdit->setPlainText(wordStr);
-            //while(true){
-                words = wordStr.split(',');
-            //}
+
+            words = wordStr.split(',');
 
             currentWordNumber = 1;
             ui->wordsQuantity->setText('/'+QString::number(words.size()));
@@ -61,14 +58,11 @@ void MainWindow::on_actionOpen_right_triggered()
         if(!inputFile.open(QIODevice::ReadOnly)){
             QMessageBox::critical(this,tr("Error"),"",tr("Can notopen file"));
         } else {
-           // QString buffer;
             QTextStream in(&inputFile);
             rightWordStr = in.readAll();
             inputFile.close();
-           // ui->textEdit->setPlainText(wordStr);
-            //while(true){
-                rightWords = rightWordStr.split(',');
-            //}
+            rightWords = rightWordStr.split(',');
+
             ui->nextWordButton->setEnabled(true);
             resWidget.getRightWords(rightWords);
         }
@@ -79,6 +73,7 @@ void MainWindow::on_actionOpen_right_triggered()
 void MainWindow::on_nextWordButton_clicked()
 {
     resWidget.addWord(ui->lineEdit->text(), currentWordNumber-1);
+    ui->lineEdit->clear();
     if(currentWordNumber<words.size()){
         currentWordNumber++;
         ui->currentWord->setText(QString::number(currentWordNumber));

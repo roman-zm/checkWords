@@ -15,7 +15,6 @@ void result::getWords(QStringList inpt)
     words = inpt;
     for(size_t i=0; i<words.size(); i++){
         ui->tableWidget->insertRow(i);
-//        ui->tableWidget->setItem(i,1, new QTableWidgetItem(words[i]));
     }
 }
 
@@ -30,13 +29,27 @@ void result::getRightWords(QStringList inpt)
 void result::addWord(QString word, unsigned int number)
 {
     ui->tableWidget->setItem(number, 0, new QTableWidgetItem(word));
-    if(word == rightWords[number])
-        ui->tableWidget->itemAt(number, 0)->setBackgroundColor(Qt::green);
+    if(!QString::localeAwareCompare(word, rightWords[number]))
+        ui->tableWidget->item(number, 0)->setBackground(QBrush(Qt::darkGreen));
     else
-        ui->tableWidget->itemAt(number, 0)->setBackgroundColor(Qt::red);
+        ui->tableWidget->item(number, 0)->setBackground(QBrush(Qt::red));
+}
+
+void result::clearTable()
+{
+    ui->tableWidget->clear();
+//    if(ui->tableWidget->rowCount()!=0)
+//        for(int i=ui->tableWidget->rowCount(); i<=0; i--)
+//            ui->tableWidget->removeRow(i);
+    ui->tableWidget->setRowCount(0);
 }
 
 result::~result()
 {
     delete ui;
+}
+
+void result::on_pushButton_clicked()
+{
+    ui->tableWidget->item(3, 1)->setBackgroundColor(Qt::blue);
 }

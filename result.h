@@ -19,6 +19,10 @@ public slots:
     void getWords(QStringList inpt);
     void getRightWords(QStringList inpt);
     void addWord(QString word, unsigned int number);
+    void clearTable();
+
+private slots:
+    void on_pushButton_clicked();
 
 private:
     Ui::result *ui;
