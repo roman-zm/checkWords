@@ -110,7 +110,14 @@
     <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
+   <widget class="QMenu" name="menuResults">
+    <property name="title">
+     <string>Results</string>
+    </property>
+    <addaction name="actionShow_results_table"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuResults"/>
   </widget>
   <action name="actionOpen">
    <property name="text">
@@ -125,6 +132,11 @@
   <action name="actionExit">
    <property name="text">
     <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionShow_results_table">
+   <property name="text">
+    <string>Show results table</string>
    </property>
   </action>
  </widget>

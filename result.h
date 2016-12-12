@@ -20,6 +20,8 @@ public slots:
     void getRightWords(QStringList inpt);
     void addWord(QString word, unsigned int number);
     void clearTable();
+    void hideColumn();
+    void showColumn();
 
 private slots:
     void on_pushButton_clicked();

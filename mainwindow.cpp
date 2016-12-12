@@ -21,6 +21,7 @@ void MainWindow::on_actionOpen_triggered()
 {
    // words.clear();
     rightWords.clear();
+    resWidget.hideColumn();
 
     currentWordNumber = 1;
     resWidget.clearTable();
@@ -61,6 +62,7 @@ void MainWindow::on_actionOpen_right_triggered()
             QTextStream in(&inputFile);
             rightWordStr = in.readAll();
             inputFile.close();
+            rightWordStr.chop(1);
             rightWords = rightWordStr.split(',');
 
             ui->nextWordButton->setEnabled(true);
@@ -81,6 +83,12 @@ void MainWindow::on_nextWordButton_clicked()
     } else {
         ui->nextWordButton->setEnabled(false);
         resWidget.show();
+        resWidget.showColumn();
     }
 }
 
+
+void MainWindow::on_actionShow_results_table_triggered()
+{
+    resWidget.show();
+}

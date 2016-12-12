@@ -24,6 +24,7 @@ void result::getRightWords(QStringList inpt)
     for(size_t i=0; i<rightWords.size(); i++){
         ui->tableWidget->setItem(i,1, new QTableWidgetItem(rightWords[i]));
     }
+
 }
 
 void result::addWord(QString word, unsigned int number)
@@ -42,6 +43,16 @@ void result::clearTable()
 //        for(int i=ui->tableWidget->rowCount(); i<=0; i--)
 //            ui->tableWidget->removeRow(i);
     ui->tableWidget->setRowCount(0);
+}
+
+void result::hideColumn()
+{
+    ui->tableWidget->hideColumn(1);
+}
+
+void result::showColumn()
+{
+    ui->tableWidget->showColumn(1);
 }
 
 result::~result()

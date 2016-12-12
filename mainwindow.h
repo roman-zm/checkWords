@@ -24,6 +24,8 @@ private slots:
 
     void on_actionOpen_right_triggered();
 
+    void on_actionShow_results_table_triggered();
+
 private:
     unsigned int currentWordNumber;
     Ui::MainWindow *ui;
